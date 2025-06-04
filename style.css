@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #006400;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.intro, .book-collection {
+  padding: 20px;
+}
+
+.book-collection ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.book-collection li {
+  background-color: #f4f4f4;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
