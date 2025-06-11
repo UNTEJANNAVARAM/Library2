@@ -1,10 +1,11 @@
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI()
 
-# Allow frontend access
+# CORS to allow frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -12,23 +13,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Book list
+books = [
+    {"title": "To Kill a Mockingbird", "author": "Harper Lee", "year_published": 1960},
+    {"title": "1984", "author": "George Orwell", "year_published": 1949},
+    {"title": "శ్రీశ్రీ కవితలు", "author": "Sri Sri", "year_published": 1960},
+    {"title": "మహాభారతం", "author": "Vyasa", "year_published": -400},
+]
+
+# Serve frontend files
 @app.get("/")
-def get_home():
+def home():
     return FileResponse("index.html")
 
 @app.get("/style.css")
-def get_css():
+def style():
     return FileResponse("style.css", media_type="text/css")
 
 @app.get("/script.js")
-def get_js():
+def script():
     return FileResponse("script.js", media_type="application/javascript")
 
+# API route for books
 @app.get("/books")
 def get_books():
-    return [
-        {"title": "To Kill a Mockingbird", "author": "Harper Lee", "year_published": 1960},
-        {"title": "1984", "author": "George Orwell", "year_published": 1949},
-        {"title": "శ్రీశ్రీ కవితలు", "author": "Sri Sri", "year_published": 1960},
-        {"title": "మహాభారతం", "author": "Vyasa", "year_published": -400},
-    ]
+    return books
+
+# Pydantic model for borrow form
+class BorrowRequest(BaseModel):
+    member_id: str
+    book_id: str
+
+@app.post("/borrow")
+def borrow_book(request: BorrowRequest):
+    return {"message": f"Member {request.member_id} borrowed Book {request.book_id} successfully!"}

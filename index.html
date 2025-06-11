@@ -2,28 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library</title>
+  <title>Library System</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <header>
-    <h1>My Telugu Library</h1>
+    <h1>Telugu Digital Library</h1>
     <nav>
       <a href="#">Home</a>
-      <a href="#">About</a>
       <a href="#">Books</a>
+      <a href="#">Borrow</a>
     </nav>
   </header>
 
   <section class="intro">
-    <h2>Welcome to Our Digital Library</h2>
-    <p>We host a collection of classic and modern Telugu literature.</p>
+    <h2>Our Collection</h2>
+    <ul id="books-list"></ul>
   </section>
 
-  <section class="book-collection">
-    <h2>Book Collection</h2>
-    <ul id="books-list"></ul>
+  <section class="borrow-form">
+    <h2>Borrow a Book</h2>
+    <form id="borrowForm">
+      <label>Member ID:</label>
+      <input type="text" id="memberId" required />
+      <label>Book ID:</label>
+      <input type="text" id="bookId" required />
+      <button type="submit">Borrow</button>
+    </form>
+    <p id="borrowMessage"></p>
   </section>
 
   <script src="/script.js" defer></script>
